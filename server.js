@@ -1,6 +1,13 @@
 import dotenv from "dotenv";
 dotenv.config();
 
+import fs from "fs/promises"; // Use fs.promises for async/await
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 import OpenAI from "openai";
 import express from "express";
 import cors from "cors";
@@ -39,6 +46,20 @@ app.post("/nvidia/v1/chat/completions", async (req, res) => {
 });
 
 
+app.get("/nvidia/v1/models", async (req, res) => {
+    try {
+        const filePath = path.join(__dirname, "models.json"); // Assuming data.json is in the same directory
+        const data = await fs.readFile(filePath, "utf8");
+        const jsonData = JSON.parse(data);
+        res.json(jsonData);
+    } catch (error) {
+        console.error("Error reading or parsing JSON file:", error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+
+
 app.get("/", (req, res) => {
     res.send("Hello from the OpenAI Express Server!");
 });
@@ -47,4 +68,3 @@ app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
 });
 
-module.exports = app;

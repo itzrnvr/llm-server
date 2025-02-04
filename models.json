@@ -1,0 +1,23 @@
+{
+  "object": "list",
+  "data": [
+    {
+      "id": "gpt4o-nova",
+      "object": "model",
+      "created": 1686935002,
+      "owned_by": "nova"
+    },
+    {
+      "id": "claude-3.5-sonnet",
+      "object": "model",
+      "created": 1686935004,
+      "owned_by": "nova"
+    },
+    {
+      "id": "deepseek-ai/deepseek-r1",
+      "object": "model",
+      "created": 1686935005,
+      "owned_by": "nvidia"
+    }
+  ]
+}
